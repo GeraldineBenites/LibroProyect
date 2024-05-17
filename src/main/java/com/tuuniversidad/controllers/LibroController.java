@@ -20,7 +20,13 @@ public class LibroController {
 
     @GetMapping("/libros")
     public List<Libro> getLibros(){
-        return libroService.getLibros();
+        try {
+            return libroService.getLibros();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+     
     } 
 
     @GetMapping("/libros/{id}")
