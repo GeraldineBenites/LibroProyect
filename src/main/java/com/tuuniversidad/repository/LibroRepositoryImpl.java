@@ -3,8 +3,11 @@ package com.tuuniversidad.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.tuuniversidad.models.Libro;
 
+@Repository
 public class LibroRepositoryImpl implements LibroRepository{
     private List<Libro> libros = new ArrayList<>();
 
