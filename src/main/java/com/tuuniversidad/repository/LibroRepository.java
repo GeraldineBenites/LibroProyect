@@ -5,7 +5,7 @@ import java.util.List;
 import com.tuuniversidad.models.Libro;
 
 public interface LibroRepository {
-    Libro getLibro(long id);
+    Libro getLibro(Long id);
     List<Libro> getLibros();
     Libro nuevoLibro(Libro libro);
 

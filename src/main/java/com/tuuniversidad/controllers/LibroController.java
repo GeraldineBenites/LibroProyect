@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tuuniversidad.models.Libro;
@@ -18,15 +19,15 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
 
+
+    @GetMapping("/hola")
+    public String Hola(){
+        return "Hola Spring libros";
+    } 
+
     @GetMapping("/libros")
     public List<Libro> getLibros(){
-        try {
             return libroService.getLibros();
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
-     
     } 
 
     @GetMapping("/libros/{id}")
@@ -35,8 +36,10 @@ public class LibroController {
         return libro;
     }
 
-    @PostMapping
-    public Libro nuevoLibro(@RequestBody Libro libro){
-        return libroService.nuevoLibro(libro);
+
+    @PostMapping("/libroPos")
+    public String crearLibro(@RequestBody Libro nuevoLibro) {
+        libroService.nuevoLibro(nuevoLibro);
+        return "Libro creado correctamente";
     }
 }

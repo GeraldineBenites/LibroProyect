@@ -15,7 +15,7 @@ public class LibroServiceImpl implements LibroService{
     private LibroRepository libroRepository;
 
     @Override
-    public Libro getLibro(long id) {
+    public Libro getLibro(Long id) {
         return libroRepository.getLibro(id);
     }
 
