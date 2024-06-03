@@ -35,12 +35,20 @@ public class LibroController {
 
     @GetMapping("/libros/{id}")
     public ResponseEntity<Libro> getLibro(@PathVariable long id){
+
         Libro libro = libroService.getLibro(id);
+
         if(libro == null){
-            throw new LibroException("no se encontró el libro " + id);
+            throw new LibroException("no se encontró la persona con el " + id);
         }
 
         return ResponseEntity.ok(libro);
+
+        // if(libro != null){
+        //     return ResponseEntity.ok(libro);
+        // }else{
+        //     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(libro);
+        // }
     }
 
 
