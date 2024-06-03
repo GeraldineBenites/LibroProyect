@@ -3,6 +3,8 @@ package com.tuuniversidad.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tuuniversidad.models.Libro;
 import com.tuuniversidad.service.LibroService;
+import com.tuuniversidad.utils.LibroException;
 
 @RestController
 public class LibroController {
@@ -31,15 +34,19 @@ public class LibroController {
     } 
 
     @GetMapping("/libros/{id}")
-    public Libro getLibro(@PathVariable long id){
+    public ResponseEntity<Libro> getLibro(@PathVariable long id){
         Libro libro = libroService.getLibro(id);
-        return libro;
+        if(libro == null){
+            throw new LibroException("no se encontró el libro " + id);
+        }
+
+        return ResponseEntity.ok(libro);
     }
 
 
     @PostMapping("/libroPos")
-    public String crearLibro(@RequestBody Libro nuevoLibro) {
-        libroService.nuevoLibro(nuevoLibro);
-        return "Libro creado correctamente";
+    public ResponseEntity<Libro> crearLibro(@RequestBody Libro nuevoLibro) {
+        var new_libro = libroService.nuevoLibro(nuevoLibro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new_libro);
     }
 }
